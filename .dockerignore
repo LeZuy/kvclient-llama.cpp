@@ -1,0 +1,17 @@
+**/.git
+
+.venv/
+build/
+build-*/
+build_*/
+
+weights/
+cache-data/
+
+__pycache__/
+*.pyc
+
+*.exe
+*.dll
+*.obj
+*.pdb
