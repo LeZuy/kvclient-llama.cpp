@@ -14,7 +14,7 @@
 
 #### API functions:
 
-A basic inference pipeline is: decoding -> export kvc_chunk -> put() to local -> network peer exchaging -> get() from local -> import kvc_chunk -> decoding 
+A basic inference pipeline is: decoding -> export kvc_chunk -> put() to local -> network peer exchaging -> import kvc_chunk from buffer -> decoding 
 
 - ``` kvc_export_chunks() ``` : llama_context -> kvc_chunk
 
