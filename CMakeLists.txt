@@ -21,8 +21,8 @@ add_library(kvclient STATIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src/kvc-dyadic.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/kvc-context.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/kvc-storage.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/core/kvc-serialize.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/core/kvc-dyadic-serialize.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/kvc-serialize/kvc-serialize.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/kvc-serialize/kvc-dyadic-serialize.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/storage/kvc-dyadic-file-storage.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/llama-wrapper/llama-wrapper.cpp"
 )
@@ -37,9 +37,10 @@ target_include_directories(kvclient PUBLIC
 target_include_directories(kvclient PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/llama.cpp/src"
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}/kvc-serialize"
 )
 
-add_executable(inference ./inference/inference.cpp)
+add_executable(inference ./inference/simple.cpp)
 
 set_target_properties(inference PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin")
 
@@ -61,13 +62,13 @@ if(KVC_BUILD_TESTS)
         tests/test-kvc-dyadic.cpp
         src/kvc-chunk.cpp
         src/kvc-dyadic.cpp
-        src/core/kvc-dyadic-serialize.cpp
+        kvc-serialize/kvc-dyadic-serialize.cpp
     )
     target_compile_features(test-kvc-dyadic PRIVATE cxx_std_17)
     target_include_directories(test-kvc-dyadic PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
         "${CMAKE_CURRENT_SOURCE_DIR}/src"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/core"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/kvc-serialize"
     )
     if(MINGW)
         target_link_options(test-kvc-dyadic PRIVATE -static-libgcc -static-libstdc++)
@@ -78,14 +79,14 @@ if(KVC_BUILD_TESTS)
         tests/test-kvc-file-storage.cpp
         src/kvc-chunk.cpp
         src/kvc-dyadic.cpp
-        src/core/kvc-dyadic-serialize.cpp
+        kvc-serialize/kvc-dyadic-serialize.cpp
         storage/kvc-dyadic-file-storage.cpp
     )
     target_compile_features(test-kvc-file-storage PRIVATE cxx_std_17)
     target_include_directories(test-kvc-file-storage PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
         "${CMAKE_CURRENT_SOURCE_DIR}/src"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/core"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/kvc-serialize"
     )
     if(MINGW)
         target_link_options(test-kvc-file-storage PRIVATE -static-libgcc -static-libstdc++)
