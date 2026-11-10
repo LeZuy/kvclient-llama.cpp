@@ -16,21 +16,13 @@
 
 A basic inference pipeline is: decoding -> export kvc_chunk -> put() to local -> network peer exchaging -> import kvc_chunk from buffer -> decoding 
 
-- ``` kvc_export_chunks() ``` : llama_context -> kvc_chunk
-
 - ``` kvc_export_dyadic_chunks() ``` : llama_context -> kvc_dyadic_chunk
 
-- ``` kvc_chunk_serialize() ``` :  kvc_chunk -> std::vector<uint8_t> (flatten both K and V tensor)
-
-- ``` kvc_dyadic_chunk_serialize() ``` :  kvc_dyadic_chunk -> std::vector<uint8_t>
+- ``` kvc_dyadic_chunk_serialize() ``` :  kvc_dyadic_chunk -> std::vector<uint8_t> (flatten both K and V tensor)
 
 - ``` kvc_dyadic_file_storage::put/get/remove``` : read or write kv serialized tensor to local files.
 
-- ``` kvc_chunk_deserialize() ``` : std::vector<uint8_t> ->  kvc_chunk
-
 - ``` kvc_dyadic_chunk_deserialize() ``` : std::vector<uint8_t> -> kvc_dyadic_chunk
-
-- ``` kvc_import_chunks() ``` :  kvc_chunk -> llama_context
 
 - ``` kvc_import_dyadic_chunks() ``` :  kvc_dyadic_chunk -> llama_context
 
