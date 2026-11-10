@@ -53,6 +53,9 @@
 /rpc-server
 /out/
 /tmp/
+/storage-data/
+/storage/*.kvd
+/storage/.*.tmp.*/
 /autogen-*.md
 /common/build-info.cpp
 
