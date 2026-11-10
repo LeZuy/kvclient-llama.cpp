@@ -8,7 +8,9 @@
 
 - ```kvc_context``` : contains model profile.
 
-- ```kvc_chunk``` & ```kvc_dyadic_chunk``` : manage ```offset```, ```n_tokens``` and ``` state_data```  
+- ```kvc_chunk``` & ```kvc_dyadic_chunk``` : manage ```offset```, ```n_tokens``` and a list of ``` kvc_dyadic_layer```  
+
+- ```kvc_dyadic_layer```: manages ```layer_idx``` and ```k_data```, ```v_data```
 
 #### API functions:
 
@@ -18,7 +20,7 @@ A basic inference pipeline is: decoding -> export kvc_chunk -> put() to local ->
 
 - ``` kvc_export_dyadic_chunks() ``` : llama_context -> kvc_dyadic_chunk
 
-- ``` kvc_chunk_serialize() ``` :  kvc_chunk -> std::vector<uint8_t>
+- ``` kvc_chunk_serialize() ``` :  kvc_chunk -> std::vector<uint8_t> (flatten both K and V tensor)
 
 - ``` kvc_dyadic_chunk_serialize() ``` :  kvc_dyadic_chunk -> std::vector<uint8_t>
 
